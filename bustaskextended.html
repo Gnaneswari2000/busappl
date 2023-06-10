@@ -1,0 +1,205 @@
+<html>
+<head><title>BUS TASK</title>
+    <link rel="stylesheet" href="D:/fullstack_learning/css-practice/bootstrap.css">
+    
+<style>
+    #i1{border:5px dashed black;}
+    #m1{font-size: 40px;
+        font-family:Gigi;
+    color:aqua;}
+body{
+    /*background-image: url('img.png');
+    background-repeat:no-repeat;
+    background-size:100% 100%;*/
+   
+background-color:lavender;
+border:5px solid black;
+margin:50px;
+padding:50px 0px 0px 0px;}
+</style>
+</head>
+<body>
+
+<!--<center><img src="C:/Users/hp/Downloads/ab.jpeg"  width="1000px"></center>-->
+<center><img  id="i1"src="https://www.truepush.com/blog/wp-content/uploads/2019/12/abhibus-logo-1-1.png" height="150px" width="1300px"></center><br>
+<marquee behavior="" id="m1" direction="right">Thank You for choosing ABHI Bus.Happy Journey</marquee><br><br>
+
+<!--From:<input type="text" name="source" id="src">
+To:<input type="text" name="destination" id="dst">-->
+
+<div class="container">
+
+    <div class="row">
+<div class="col-7">
+From:<select name="source" id="src">
+<option value="">---Select---</option>
+<option value="hyderabad">Hyderabad</option>
+<option value="bangalore">Bangalore</option>
+<option value="vijayawada">Vijayawada</option>
+<option value="chennai">Chennai</option>
+<option value="vizag">Vizag</option>
+</select>
+To:<select name="destination" id="dst">
+<option value="">---Select---</option>
+<option value="chennai">Chennai</option>
+<option value="vizag">Vizag</option>
+<option value="hyderabad">Hyderabad</option>
+<option value="bangalore">Bangalore</option>
+<option value="vijayawada">Vijayawada</option>
+</select>
+<button onclick="buslist()">Get Buses</button><br><br>
+<div id="d1" >    </div>
+</div>
+<div class="col-5">
+    <img src="busimg.jpg" height="250px" width="500px">
+</div>
+</div>
+</div>
+
+
+<script>
+var bus_list=[{Slno:1,travels:"kaveri",from:"hyderabad",to:"vizag",arivaltime:"9:30",depttime:"14:40",date:"29/11/2022",fair:640,seats:42,
+book:"<button>"+"Book Now"+"</button>"},
+{Slno:2,travels:"sai krishna",from:"hyderabad",to:"bangalore",arivaltime:"2:20",depttime:"5:30",date:"1/12/2022",fair:550,seats:50,book:"<button >"+"Book Now"+"</button>"},
+{Slno:3,travels:"morning star",from:"hyderabad",to:"chennai",arivaltime:"5:00",depttime:"9:52",date:"1/12/2022",fair:600,seats:40,book:"<button>"+"Book Now"+"</button>"},
+{Slno:4,travels:"orange",from:"hyderabad",to:"vijayawada",arivaltime:"8:25",depttime:"4:55",date:"3/02/2023",fair:450,seats:45,book:"<button>"+"Book Now"+"</button>"},
+{Slno:5,travels:"raj",from:"vijayawada",to:"vizag",arivaltime:"11:25",depttime:"9:00",date:"2/12/2022",fair:400,seats:30,book:"<button>"+"Book Now"+"</button>"},
+{Slno:6,travels:"orange",from:"vijayawada",to:"bangalore",arivaltime:"10:45",depttime:"3:00",date:"1/12/2022",fair:500,seats:45,book:"<button>"+"Book Now"+"</button>"},
+{Slno:7,travels:"morning star",from:"vijayawada",to:"chennai",arivaltime:"9:52",depttime:"4:00",date:"2/12/2022",fair:490,seats:29,book:"<button>"+"Book Now"+"</button>"},
+{Slno:8,travels:"kaveri",from:"vijayawada",to:"hyderabad",arivaltime:"10:50",depttime:"9:52",date:"3/12/2022",fair:430,seats:65,book:"<button>"+"Book Now"+"</button>"},
+{Slno:9,travels:"krishna",from:"vizag",to:"vijayawada",arivaltime:"4:50",depttime:"11:50",date:"12/12/2022",fair:520,seats:40,book:"<button>"+"Book Now"+"</button>"},
+{Slno:10,travels:"verma",from:"vizag",to:"bangalore",arivaltime:"2:36",depttime:"2:56",date:"5/12/2022",fair:410,seats:51,book:"<button>"+"Book Now"+"</button>"},
+{Slno:11,travels:"orange",from:"vizag",to:"chennai",arivaltime:"4:56",depttime:"9:52",date:"2/2/2023",fair:800,seats:65,book:"<button>"+"Book Now"+"</button>"},
+{Slno:12,travels:"sai krishna",from:"vizag",to:"hyderabad",arivaltime:"3:50",depttime:"10:50",date:"2/1/2023",fair:690,seats:58,book:"<button>"+"Book Now"+"</button>"},
+{Slno:13,travels:"mega",from:"bangalore",to:"chennai",arivaltime:"9:20",depttime:"2:00",date:"29/12/2022",fair:570,seats:35,book:"<button>"+"Book Now"+"</button>"},
+{Slno:14,travels:"morning star",from:"bangalore",to:"hyderabad",arivaltime:"8:40",depttime:"9:00",date:"4/12/2022",fair:1200,seats:24,book:"<button>"+"Book Now"+"</button>"},
+{Slno:15,travels:"verma",from:"bangalore",to:"vizag",arivaltime:"5:00",depttime:"3:00",date:"9/12/2022",fair:580,seats:54,book:"<button>"+"Book Now"+"</button>"},
+{Slno:16,travels:"orange",from:"bangalore",to:"vijayawada",arivaltime:"3:00",depttime:"9:52",date:"8/12/2022",fair:620,seats:41,book:"<button>"+"Book Now"+"</button>"},
+{Slno:17,travels:"sai krishna",from:"chennai",to:"vizag",arivaltime:"2:20",depttime:"9:25",date:"4/01/2023",fair:390,seats:24,book:"<button>"+"Book Now"+"</button>"},
+{Slno:18,travels:"verma",from:"chennai",to:"hyderabad",arivaltime:"6:20",depttime:"5:00",date:"1/1/2023",fair:840,seats:44,book:"<button>"+"Book Now"+"</button>"},
+{Slno:19,travels:"morning star",from:"chennai",to:"vijayawada",arivaltime:"8:55",depttime:"5:00",date:"6/1/2023",fair:550,seats:25,book:"<button>"+"Book Now"+"</button>"},
+{Slno:20,travels:"verma",from:"chennai",to:"bangalore",arivaltime:"9:52",depttime:"1:00",date:"29/12/2022",fair:750,seats:54,book:"<button>"+"Book Now"+"</button>"},
+    
+
+{Slno:21,travels:"siri",from:"hyderabad",to:"chennai",arivaltime:"5:20",depttime:"11:10",date:"12/12/2022",fair:420,seats:85,book:"<button>"+"Book Now"+"</button>"},
+{Slno:22,travels:"morning star",from:"hyderabad",to:"bangalore",arivaltime:"1:00",depttime:"10:52",date:"5/12/2022",fair:482,seats:54,book:"<button>"+"Book Now"+"</button>"},
+{Slno:23,travels:"garuda",from:"hyderabad",to:"vijayawada",arivaltime:"10:50",depttime:"4:56",date:"1/1/2023",fair:555,seats:20,book:"<button>"+"Book Now"+"</button>"},
+{Slno:24,travels:"verma",from:"hyderabad",to:"vizag",arivaltime:"10:20",depttime:"6:20",date:"11/12/2022",fair:540,seats:54,book:"<button>"+"Book Now"+"</button>"},
+{Slno:25,travels:"kaveri",from:"vijayawada",to:"bangalore",arivaltime:"12:00",depttime:"1:52",date:"23/12/2022",fair:780,seats:30,book:"<button>"+"Book Now"+"</button>"},
+{Slno:26,travels:"morning star",from:"vijayawada",to:"hyderabad",arivaltime:"4:56",depttime:"9:52",date:"26/12/2022",fair:630,seats:12,book:"<button>"+"Book Now"+"</button>"},
+{Slno:27,travels:"verma",from:"vijayawada",to:"chennai",arivaltime:"1:00",depttime:"9:56",date:"5/01/2023",fair:920,seats:15,book:"<button>"+"Book Now"+"</button>"},
+{Slno:28,travels:"orange",from:"vijayawada",to:"vizag",arivaltime:"1:25",depttime:"5:55",date:"10/12/2022",fair:845,seats:40,book:"<button>"+"Book Now"+"</button>"},
+{Slno:29,travels:"raj",from:"chennai",to:"vizag",arivaltime:"9:52",depttime:"10:50",date:"19/12/2022",fair:456,seats:50,book:"<button>"+"Book Now"+"</button>"},
+{Slno:30,travels:"krishna",from:"chennai",to:"hyderabad",arivaltime:"13:10",depttime:"4:50",date:"31/12/2022",fair:853,seats:25,book:"<button>"+"Book Now"+"</button>"},
+{Slno:31,travels:"siri",from:"chennai",to:"bangalore",arivaltime:"1:00",depttime:"10:56",date:"3/01/2023",fair:666,seats:30,book:"<button>"+"Book Now"+"</button>"},
+{Slno:32,travels:"garuda",from:"chennai",to:"vijayawada",arivaltime:"12:25",depttime:"6:22",date:"2/2/2023",fair:458,seats:60,book:"<button>"+"Book Now"+"</button>"},
+{Slno:33,travels:"kaveri",from:"bangalore",to:"vizag",arivaltime:"10:50",depttime:"5:50",date:"23/12/2022",fair:493,seats:50,book:"<button>"+"Book Now"+"</button>"},
+{Slno:34,travels:"siri",from:"bangalore",to:"hyderabad",arivaltime:"9:50",depttime:"12:30",date:"25/12/2022",fair:426,seats:27,book:"<button>"+"Book Now"+"</button>"},
+{Slno:35,travels:"orange",from:"bangalore",to:"chennai",arivaltime:"15:40",depttime:"1:10",date:"16/12/2022",fair:395,seats:36,book:"<button>"+"Book Now"+"</button>"},
+{Slno:36,travels:"raj",from:"bangalore",to:"vijayawada",arivaltime:"9:52",depttime:"1:39",date:"2/1/2023",fair:621,seats:38,book:"<button>"+"Book Now"+"</button>"},
+{Slno:37,travels:"raj",from:"vizag",to:"vijayawada",arivaltime:"1:00",depttime:"9:20",date:"14/12/2022",fair:564,seats:29,book:"<button>"+"Book Now"+"</button>"},
+{Slno:38,travels:"krishna",from:"vizag",to:"bangalore",arivaltime:"1:00",depttime:"10:50",date:"25/12/2022",fair:460,seats:36,book:"<button>"+"Book Now"+"</button>"},
+{Slno:39,travels:"kaveri",from:"vizag",to:"hyderabad",arivaltime:"14:45",depttime:"10:20",date:"2/01/2023",fair:684,seats:44,book:"<button>"+"Book Now"+"</button>"},
+{Slno:40,travels:"morning star",from:"vizag",to:"chennai",arivaltime:"10:50",depttime:"5:50",date:"1/1/2023",fair:940,seats:34,book:"<button>"+"Book Now"+"</button>"},
+
+{Slno:41,travels:"kaveri",from:"vijayawada",to:"chennai",arivaltime:"12:26",depttime:"12:00",date:"22/12/2022",fair:550,seats:45,book:"<button>"+"Book Now"+"</button>"},
+{Slno:42,travels:"orange",from:"vijayawada",to:"hyderabad",arivaltime:"1:20",depttime:"10:25",date:"29/12/2022",fair:590,seats:32,book:"<button>"+"Book Now"+"</button>"},
+{Slno:43,travels:"Raj",from:"vijayawada",to:"bangalore",arivaltime:"5:56",depttime:"6:55",date:"5/1/2023",fair:774,seats:27,book:"<button>"+"Book Now"+"</button>"},
+{Slno:44,travels:"verma",from:"vijayawada",to:"vizag",arivaltime:"8:45",depttime:"6:20",date:"21/12/2022",fair:680,seats:43,book:"<button>"+"Book Now"+"</button>"},
+{Slno:45,travels:"raj",from:"vizag",to:"hyderabad",arivaltime:"1:00",depttime:"10:23",date:"5/12/2022",fair:530,seats:16,book:"<button>"+"Book Now"+"</button>"},
+{Slno:46,travels:"morning star",from:"vizag",to:"vijayawada",arivaltime:"10:50",depttime:"6:55",date:"26/12/2022",fair:640,seats:22,book:"<button>"+"Book Now"+"</button>"},
+{Slno:47,travels:"kaveri",from:"vizag",to:"chennai",arivaltime:"6:50",depttime:"12:40",date:"23/12/2022",fair:850,seats:10,book:"<button>"+"Book Now"+"</button>"},
+{Slno:48,travels:"siri",from:"vizag",to:"bangalore",arivaltime:"9:50",depttime:"4:20",date:"10/01/2023",fair:993,seats:29,book:"<button>"+"Book Now"+"</button>"},
+{Slno:49,travels:"sri ram",from:"bangalore",to:"vizag",arivaltime:"10:00",depttime:"9:50",date:"26/12/2022",fair:393,seats:32,book:"<button>"+"Book Now"+"</button>"},
+{Slno:50,travels:"orange",from:"bangalore",to:"hyderabad",arivaltime:"1:00",depttime:"11:15",date:"23/12/2022",fair:541,seats:43,book:"<button>"+"Book Now"+"</button>"},
+{Slno:51,travels:"morning star",from:"bangalore",to:"chennai",arivaltime:"10:50",depttime:"8:10",date:"25/12/2022",fair:620,seats:25,book:"<button>"+"Book Now"+"</button>"},
+{Slno:52,travels:"sai krishna",from:"bangalore",to:"vijayawada",arivaltime:"9:00",depttime:"6:50",date:"28/12/2022",fair:850,seats:19,book:"<button>"+"Book Now"+"</button>"},
+{Slno:53,travels:"garuda",from:"chennai",to:"hyderabad",arivaltime:"10:40",depttime:"9:50",date:"22/12/2022",fair:570,seats:10,book:"<button>"+"Book Now"+"</button>"},
+{Slno:54,travels:"raj",from:"chennai",to:"bangalore",arivaltime:"14:50",depttime:"9:58",date:"1/1/2023",fair:885,seats:26,book:"<button>"+"Book Now"+"</button>"},
+{Slno:55,travels:"sai krishna",from:"chennai",to:"vijayawada",arivaltime:"10:00",depttime:"12:25",date:"29/12/2022",fair:540,seats:16,book:"<button>"+"Book Now"+"</button>"},
+{Slno:56,travels:"orange",from:"chennai",to:"vizag",arivaltime:"19:56",depttime:"6:36",date:"24/12/2022",fair:456,seats:55,book:"<button>"+"Book Now"+"</button>"},
+{Slno:57,travels:"kaveri",from:"hyderabad",to:"bangalore",arivaltime:"1:00",depttime:"6:50",date:"5/1/2023",fair:1200,seats:46,book:"<button>"+"Book Now"+"</button>"},
+{Slno:58,travels:"morning star",from:"hyderabad",to:"vizag",arivaltime:"16:59",depttime:"1:59",date:"4/1/2023",fair:860,seats:13,book:"<button>"+"Book Now"+"</button>"},
+{Slno:59,travels:"verma",from:"hyderabad",to:"vijayawada",arivaltime:"10:50",depttime:"5:23",date:"3/1/2023",fair:952,seats:10,book:"<button>"+"Book Now"+"</button>"},
+{Slno:60,travels:"garuda",from:"hyderabad",to:"chennai",arivaltime:"10:50",depttime:"9:56",date:"30/12/2022",fair:540,seats:18,book:"<button>"+"Book Now"+"</button>"},
+
+
+    
+
+{Slno:61,travels:"kaveri",from:"bangalore",to:"chennai",arivaltime:"12:50",depttime:"5:50",date:"2/2/2023",fair:660,seats:12,book:"<button>"+"Book Now"+"</button>"},
+{Slno:62,travels:"kaveri",from:"bangalore",to:"hyderabad",arivaltime:"10:50",depttime:"6:55",date:"25/12/2022",fair:520,seats:26,book:"<button>"+"Book Now"+"</button>"},
+{Slno:63,travels:"morning star",from:"bangalore",to:"vizag",arivaltime:"1:55",depttime:"10:21",date:"21/12/2022",fair:245,seats:19,book:"<button>"+"Book Now"+"</button>"},
+{Slno:64,travels:"verma",from:"bangalore",to:"vijayawada",arivaltime:"19:20",depttime:"4:20",date:"31/12/2022",fair:445,seats:43,book:"<button>"+"Book Now"+"</button>"},
+{Slno:65,travels:"kaveri",from:"chennai",to:"hyderabad",arivaltime:"15:48",depttime:"10:50",date:"10/2/2023",fair:654,seats:54,book:"<button>"+"Book Now"+"</button>"},
+{Slno:66,travels:"siri",from:"chennai",to:"vizag",arivaltime:"1:00",depttime:"11:10",date:"1/1/2022",fair:453,seats:10,book:"<button>"+"Book Now"+"</button>"},
+{Slno:67,travels:"siri",from:"chennai",to:"vijayawada",arivaltime:"8:50",depttime:"10:50",date:"29/12/2022",fair:545,seats:19,book:"<button>"+"Book Now"+"</button>"},
+{Slno:68,travels:"kaveri",from:"chennai",to:"bangalore",arivaltime:"9:10",depttime:"4:50",date:"5/2/2023",fair:555,seats:54,book:"<button>"+"Book Now"+"</button>"},
+{Slno:69,travels:"sai krishna",from:"vijayawada",to:"hyderabad",arivaltime:"10:50",depttime:"5:20",date:"2/2/2023",fair:522,seats:20,book:"<button>"+"Book Now"+"</button>"},
+{Slno:70,travels:"garuda",from:"vijayawada",to:"bangalore",arivaltime:"10:50",depttime:"2:25",date:"21/12/2022",fair:563,seats:35,book:"<button>"+"Book Now"+"</button>"},
+{Slno:71,travels:"kaveri",from:"vijayawada",to:"vizag",arivaltime:"6:20",depttime:"10:10",date:"26/12/2022",fair:685,seats:15,book:"<button>"+"Book Now"+"</button>"},
+{Slno:72,travels:"orange",from:"vijayawada",to:"chennai",arivaltime:"1:00",depttime:"11:46",date:"24/12/2022",fair:518,seats:20,book:"<button>"+"Book Now"+"</button>"},
+{Slno:73,travels:"sai krishna",from:"vizag",to:"bangalore",arivaltime:"13:00",depttime:"11:10",date:"29/12/2022",fair:944,seats:12,book:"<button>"+"Book Now"+"</button>"},
+{Slno:74,travels:"siri",from:"vizag",to:"chennai",arivaltime:"10:50",depttime:"4:00",date:"9/1/2023",fair:547,seats:32,book:"<button>"+"Book Now"+"</button>"},
+{Slno:75,travels:"kaveri",from:"vizag",to:"vijayawada",arivaltime:"10:50",depttime:"10:50",date:"30/12/2022",fair:845,seats:20,book:"<button>"+"Book Now"+"</button>"},
+{Slno:76,travels:"garuda",from:"vizag",to:"hyderabad",arivaltime:"15:20",depttime:"12:30",date:"4/1/2023",fair:755,seats:40,book:"<button>"+"Book Now"+"</button>"},
+{Slno:77,travels:"orange",from:"hyderabad",to:"bangalore",arivaltime:"8:00",depttime:"6:50",date:"3/1/2023",fair:548,seats:32,book:"<button>"+"Book Now"+"</button>"},
+{Slno:78,travels:"sai krishna",from:"hyderabad",to:"chennai",arivaltime:"10:45",depttime:"4:50",date:"9/1/2023",fair:995,seats:10,book:"<button>"+"Book Now"+"</button>"},
+{Slno:79,travels:"sai krishna",from:"hyderabad",to:"vijayawada",arivaltime:"10:50",depttime:"4:00",date:"7/1/2023",fair:896,seats:10,book:"<button>"+"Book Now"+"</button>"},
+{Slno:80,travels:"kaveri",from:"hyderabad",to:"vizag",arivaltime:"1:00",depttime:"21:20",date:"12/1/2023",fair:854,seats:15,book:"<button>"+"Book Now"+"</button>"},
+
+{Slno:81,travels:"sri ram",from:"hyderabad",to:"chennai",arivaltime:"15:20",depttime:"11:10",date:"29/12/2022",fair:420,seats:85,book:"<button>"+"Book Now"+"</button>"},
+{Slno:82,travels:"morning star",from:"hyderabad",to:"bangalore",arivaltime:"10:00",depttime:"10:52",date:"5/1/20223",fair:482,seats:54,book:"<button>"+"Book Now"+"</button>"},
+{Slno:83,travels:"siri",from:"hyderabad",to:"vijayawada",arivaltime:"10:50",depttime:"4:56",date:"1/1/2023",fair:555,seats:20,book:"<button>"+"Book Now"+"</button>"},
+{Slno:84,travels:"verma",from:"hyderabad",to:"vizag",arivaltime:"10:20",depttime:"6:20",date:"31/12/2022",fair:540,seats:54,book:"<button>"+"Book Now"+"</button>"},
+{Slno:85,travels:"siri",from:"vijayawada",to:"bangalore",arivaltime:"12:00",depttime:"1:52",date:"29/12/2022",fair:780,seats:30,book:"<button>"+"Book Now"+"</button>"},
+{Slno:86,travels:"morning star",from:"vijayawada",to:"hyderabad",arivaltime:"14:56",depttime:"9:52",date:"2/2/2023",fair:630,seats:12,book:"<button>"+"Book Now"+"</button>"},
+{Slno:87,travels:"garuda",from:"vijayawada",to:"chennai",arivaltime:"1:00",depttime:"9:56",date:"5/01/2023",fair:920,seats:15,book:"<button>"+"Book Now"+"</button>"},
+{Slno:88,travels:"orange",from:"vijayawada",to:"vizag",arivaltime:"11:25",depttime:"15:55",date:"10/2/2023",fair:845,seats:40,book:"<button>"+"Book Now"+"</button>"},
+{Slno:89,travels:"morning star",from:"chennai",to:"vizag",arivaltime:"9:52",depttime:"10:50",date:"19/1/2023",fair:456,seats:50,book:"<button>"+"Book Now"+"</button>"},
+{Slno:90,travels:"sai krishna",from:"chennai",to:"hyderabad",arivaltime:"13:10",depttime:"4:50",date:"31/12/2022",fair:853,seats:25,book:"<button>"+"Book Now"+"</button>"},
+{Slno:91,travels:"sai krishna",from:"chennai",to:"bangalore",arivaltime:"12:00",depttime:"10:56",date:"3/01/2023",fair:666,seats:30,book:"<button>"+"Book Now"+"</button>"},
+{Slno:92,travels:"verma",from:"chennai",to:"vijayawada",arivaltime:"12:25",depttime:"16:22",date:"2/2/2023",fair:458,seats:60,book:"<button>"+"Book Now"+"</button>"},
+{Slno:93,travels:"krishna",from:"bangalore",to:"vizag",arivaltime:"10:50",depttime:"5:50",date:"22/2/2023",fair:493,seats:50,book:"<button>"+"Book Now"+"</button>"},
+{Slno:94,travels:"garuda",from:"bangalore",to:"hyderabad",arivaltime:"19:50",depttime:"12:30",date:"2/1/2023",fair:426,seats:27,book:"<button>"+"Book Now"+"</button>"},
+{Slno:95,travels:"siri",from:"bangalore",to:"chennai",arivaltime:"15:40",depttime:"12:10",date:"31/12/2022",fair:395,seats:36,book:"<button>"+"Book Now"+"</button>"},
+{Slno:96,travels:"morning star",from:"bangalore",to:"vijayawada",arivaltime:"9:52",depttime:"1:39",date:"2/1/2023",fair:621,seats:38,book:"<button>"+"Book Now"+"</button>"},
+{Slno:97,travels:"verma",from:"vizag",to:"vijayawada",arivaltime:"1:00",depttime:"9:20",date:"31/12/2022",fair:564,seats:29,book:"<button>"+"Book Now"+"</button>"},
+{Slno:98,travels:"raj",from:"vizag",to:"bangalore",arivaltime:"1:00",depttime:"15:50",date:"30/12/2022",fair:460,seats:36,book:"<button>"+"Book Now"+"</button>"},
+{Slno:99,travels:"siri",from:"vizag",to:"hyderabad",arivaltime:"12:45",depttime:"10:20",date:"2/01/2023",fair:684,seats:44,book:"<button>"+"Book Now"+"</button>"},
+{Slno:100,travels:"krishna",from:"vizag",to:"chennai",arivaltime:"1:50",depttime:"5:50",date:"1/1/2023",fair:940,seats:34,book:"<button>"+"Book Now"+"</button>"}];
+
+
+function buslist()
+{
+var count=0;
+var sorc=document.getElementById('src').value;
+var dest=document.getElementById('dst').value;
+console.log(sorc);
+console.log(dest);
+
+var ta="<table>"+"<tr>"+"<th>"+"No"+"</th>"+"<th>"+"Travels"+"</th>"+"<th>"+"From"+"</th>"+"<th>"+"To"+"</th>"+"<th>"+"ArivalTime"+"</th>"+"<th>"+
+"DeptTime"+"</th>"+"<th>"+"Date"+"</th>"+"<th>"+"Fair"+"</th>"+"<th>"+"Seats"+"</th>"+"<th>"+"Booking"+"</th>"+"</tr>";
+var tab="";
+tab=tab+ta;
+for(var a in bus_list)
+{
+if(sorc==bus_list[a].from && dest==bus_list[a].to)
+{
+count++;
+tab=tab+"<tr>"+"<td>"+count+"</td>"+"<td>"+bus_list[a].travels+"</td>"+"<td>"+bus_list[a].from+"</td>"+"<td>"+bus_list[a].to+"</td>"+"<td>"+bus_list[a].arivaltime+
+"</td>"+"<td>"+bus_list[a].depttime+"</td>"+"<td>"+bus_list[a].date+"</td>"+"<td>"+bus_list[a].fair+"</td>"+"<td>"+bus_list[a].seats+"</td>"
++"<td>"+bus_list[a].book+"</td>"+"</tr>"
+}
+}
+tab=tab+"</table>";
+document.getElementById('d1').innerHTML=tab;
+//document.getElementById('d1').innerHTML=tab+"<h3>"+"total "+count+" students found"+"</h3>";
+
+
+}
+
+
+</script>
+
+</body>
+</html>
